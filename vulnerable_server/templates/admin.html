@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Панель администратора{% endblock %}
+
+{% block content %}
+{% if not payload %}
+<div class="error">
+    <h2>🚫 Доступ запрещен!</h2>
+    <p>Для доступа к панели администратора требуется валидный JWT токен.</p>
+    <p><a href="/login" style="color: #e74c3c;">→ Перейти к авторизации</a></p>
+</div>
+{% else %}
+<h1>👨‍💼 Панель администратора</h1>
+<div class="success">
+    <p>Добро пожаловать, <strong>{{ payload.username }}</strong>!</p>
+    <p>Время входа: {{ payload.iat | datetime_from_timestamp }}</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0;">
+    <div style="background: #d4edda; padding: 20px; border-radius: 10px;">
+        <h3>🔑 Секретные данные</h3>
+        <p><strong>Ключ сервера:</strong> neowifi{m1tm_p455w0rd_0r_t0k3n_1nt3rc3pt10n_0v3r_9000}</p>
+        <p><strong>Токен API:</strong> API-TOKEN-123-456-789</p>
+        <p><strong>База данных:</strong> mysql://admin:pass@localhost:3306/app</p>
+    </div>
+</div>
+
+<div style="background: #fff3cd; padding: 15px; border-radius: 5px;">
+    <h4>ℹ️ Техническая информация</h4>
+    <p>Эта страница доступна только с валидным JWT токеном.</p>
+    <p>Токен проверяется на сервере с использованием секретного ключа.</p>
+</div>
+{% endif %}
+{% endblock %}

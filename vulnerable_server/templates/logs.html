@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Просмотр логов{% endblock %}
+
+{% block content %}
+<h1>📊 Логи доступа</h1>
+
+<div style="background: #e8f4fd; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+    <h3>🔍 Чтение логов из файла</h3>
+    <p>Параметр <code>file</code> используется для доступа к логам.</p>
+</div>
+
+{% if logs %}
+<pre>{{ logs }}</pre>
+{% else %}
+<p>Логи не найдены или файл недоступен.</p>
+{% endif %}
+
+<hr>
+
+<h3>🧪 Примеры log-файлов:</h3>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+    <div>
+        <h4>Logs:</h4>
+        <ul>
+            <li><a href="/logs?file=./access.log">Access logs</a></li>
+            <li><a href="/logs?file=./test.log">Some test data</a></li>
+            <li><a href="/logs?file=./flag.log">Logs with sercret information</a></li>
+            <li><a href="/logs?file=./fl4g.log">Password changes log</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
